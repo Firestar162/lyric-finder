@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/9052fca40d.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Lyric Finder</title>
+  </head>
+  <nav>
+    <div id="logo-title">
+      <h1>Lyric Finder</h1>
+    </div>
+    <div id="nav-options">
+      <!-- onclick function is to scroll smoothly to footer-->
+      <a
+        class="nav-links"
+        onclick="document.getElementById('footer').scrollIntoView({behavior: 'smooth'});"
+      >
+        <h3 class="nav-text">About</h3>
+      </a>
+      <a class="nav-links" href="mailto:pvahanan@gmail.com">
+        <h3 class="nav-text">Contact</h3>
+      </a>
+    </div>
+  </nav>
+  <body>
+    <div class="formHolder">
+      <h1 id="call-to-action">Search for song lyrics.</h1>
+
+      <form action="/findlyrics" id="lyricFinderForm" method="POST">
+        <input
+          type="text"
+          id="song-input"
+          name="songname"
+          placeholder="Song name"
+        />
+        <input
+          type="text"
+          id="artist-input"
+          name="artistname"
+          placeholder="Artist name"
+        />
+        <button type="submit" class="formSubmit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+    <div class="lyricHolder">
+      <% if (locals.lyrics) { %>
+      <h1 id="song-details"><%= song %> - <%= artist %></h1>
+      <h1 id="lyrics"><%- lyrics %></h1>
+      <% } else { %>
+      <h1 id="error-msg"><%= isAvailable %></h1>
+      <% } %>
+    </div>
+    <section id="footer">
+      <div id="social-media">
+        <a href="mailto:pvahanan@gmail.com">
+          <i class="icons fa-regular fa-envelope"></i>
+        </a>
+
+        <a href="https://www.instagram.com/pranav_mayilvahanan/">
+          <i class="icons fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/pranav-mayilvahanan/">
+          <i class="icons fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+      <h2 id="copyright">© Pranav Mayilvahanan 2024</h2>
+    </section>
+  </body>
+  <script>
+    // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+    window.onscroll = function () {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      const navTexts = document.getElementsByClassName("nav-text");
+      if (
+        document.body.scrollTop > 60 ||
+        document.documentElement.scrollTop > 60
+      ) {
+        document.getElementById("logo-title").style.fontSize = "1.3rem";
+        document.getElementById("nav-options").style.gap = "5vw";
+        for (let i = 0; i < navTexts.length; i++) {
+          navTexts[i].style.fontSize = "1.2rem";
+        }
+      } else {
+        document.getElementById("logo-title").style.fontSize = "2rem";
+        document.getElementById("nav-options").style.gap = "8vw";
+        for (let i = 0; i < navTexts.length; i++) {
+          navTexts[i].style.fontSize = "1.6rem";
+        }
+      }
+    }
+  </script>
+</html>
