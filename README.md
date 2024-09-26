@@ -1,3 +1,5 @@
+<h1>Installation</h1>
+
 Download then run:
 ```
 npm i
